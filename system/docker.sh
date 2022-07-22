@@ -1,23 +1,24 @@
 #!/bin/bash
 
 yum remove docker \
-    docker-client \
-    docker-client-latest \
-    docker-common \
-    docker-latest \
-    docker-latest-logrotate \
-    docker-logrotate \
-    docker-engine
+  docker-client \
+  docker-client-latest \
+  docker-common \
+  docker-latest \
+  docker-latest-logrotate \
+  docker-logrotate \
+  docker-engine
 
 yum install -y yum-utils
 
 yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
+  --add-repo \
+  https://download.docker.com/linux/centos/docker-ce.repo
 
 yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 
 # config
+mkdir -p /etc/docker
 cat >/etc/docker/daemon.json <<EOF
 {
   "registry-mirrors": [
